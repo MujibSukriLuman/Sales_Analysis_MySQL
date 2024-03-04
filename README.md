@@ -76,9 +76,59 @@ This will help use generate some new columns from existing ones.
 
  1. Add a new column named `time_of_day` to give insight of sales in the Morning, Afternoon and Evening. This will help answer the question on which part of the day most sales are made.
 
+> the unswers:
+```sql
+					--add time_of_day---
+SELECT
+	time,
+	(CASE
+		WHEN `time` BETWEEN "00:00:00" AND "12:00:00" THEN "Morning"
+        WHEN `time` BETWEEN "12:01:00" AND "16:00:00" THEN "Afternoon"
+        ELSE "Evening"
+    END) AS time_of_day
+FROM sales;
+
+
+ALTER TABLE sales ADD COLUMN time_of_day VARCHAR(20);
+
+UPDATE sales
+SET time_of_day = (
+	CASE
+		WHEN `time` BETWEEN "00:00:00" AND "12:00:00" THEN "Morning"
+        WHEN `time` BETWEEN "12:01:00" AND "16:00:00" THEN "Afternoon"
+        ELSE "Evening"
+    END);
+```
+
  2. Add a new column named `day_name` that contains the extracted days of the week on which the given transaction took place (Mon, Tue, Wed, Thur, Fri). This will help answer the question on which week of the day each branch is busiest.
+> the unswers:
+```sql
+						-- Add day_name column--
+SELECT
+	date,
+	DAYNAME(date)
+FROM sales;
+
+ALTER TABLE sales ADD COLUMN day_name VARCHAR(10);
+
+UPDATE sales
+SET day_name = DAYNAME(date);
+```
 
 3. Add a new column named `month_name` that contains the extracted months of the year on which the given transaction took place (Jan, Feb, Mar). Help determine which month of the year has the most sales and profit.
+< the unswers:
+```sql
+					   -- Add month_name column--
+SELECT
+	date,
+	MONTHNAME(date)
+FROM sales;
+
+ALTER TABLE sales ADD COLUMN month_name VARCHAR(10);
+
+UPDATE sales
+SET month_name = MONTHNAME(date);
+```
 
 2. **Exploratory Data Analysis (EDA):** Exploratory data analysis is done to answer the listed questions and aims of this project.
 
