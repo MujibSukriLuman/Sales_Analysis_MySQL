@@ -308,25 +308,85 @@ ORDER BY total_tax;
 ### Customer
 
 1. How many unique customer types does the data have?
-
+```sql
+SELECT
+	DISTINCT customer_type
+FROM sales;
+```
 2. How many unique payment methods does the data have?
-
+```sql
+SELECT
+	DISTINCT payment_method
+FROM sales;
+```
 3. What is the most common customer type?
 
 4. Which customer type buys the most?
-
+```sql
+SELECT
+	customer_type,
+    COUNT(*) AS quant_custemr # Must know diffrence between count and sum, count do from the fist to the last, sum is add up each value
+FROM sales
+GROUP BY customer_type
+ORDER BY quant_custemr DESC;
+```
 5. What is the gender of most of the customers?
-
+```sql
+SELECT
+	gender,
+    COUNT(*) AS gender_cnt
+FROM sales
+GROUP BY gender
+ORDER BY gender_cnt DESC;
+```
 6. What is the gender distribution per branch?
-
+```sql
+SELECT
+	gender,
+    COUNT(*) AS gender_branch
+FROM sales
+WHERE branch ="A"# adding where to be selected per branch
+GROUP BY gender
+ORDER BY gender_branch DESC;
+```
 7. Which time of the day do customers give most ratings?
-
+```sql
+SELECT
+	time_of_day,
+    AVG(rating) AS Avg_rating
+FROM sales
+GROUP BY time_of_day
+ORDER BY Avg_rating DESC;
+```
 8. Which time of the day do customers give most ratings per branch?
-
+```sql
+SELECT
+	time_of_day,
+    AVG(rating) AS avg_rating
+FROM sales
+WHERE branch = "A"
+GROUP BY time_of_day
+ORDER BY avg_rating DESC;
+```
 9. Which day fo the week has the best avg ratings?
-
+```sql
+SELECT
+	day_name,
+    AVG(rating) as avg_rat
+FROM sales
+GROUP BY day_name
+ORDER BY avg_rat DESC;
+```
 10. Which day of the week has the best average ratings per branch?
-
+```sql
+SELECT
+	day_name,
+    AVG(rating) AS avg_rating
+FROM sales
+WHERE branch = "A"
+GROUP BY day_name
+ORDER BY avg_rating DESC;
+```
 
 ## Revenue And Profit Calculations
 
