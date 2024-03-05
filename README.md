@@ -71,6 +71,8 @@ The major aim of this project is to gain insight into Walmart sales data, and th
 | gross_income            | Gross Income                            | DECIMAL(10, 2) |
 | rating                  | Rating                                  | FLOAT(2, 1)    |
 
+create table for dataset with column, description and data type avobe. and then input [WalmartSalesDataset](https://github.com/nurastars/Sales_Analysis_MySQL/blob/main/WalmartSalesData.csv) to the column created. for this tutorial can be lean in this link...
+
 # 3. Feature Engineering:
 This will help use generate some new columns from existing ones.
 
